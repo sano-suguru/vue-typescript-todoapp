@@ -12,10 +12,11 @@
       <tbody>
         <!-- TODO: todoを１行ずつ繰り返し表示したい -->
         <tr v-for="todo in todos" :key="todo.id">
-          <th>{{ item.id }}</th>
+          <th>{{ todo.id }}</th>
+          <td>{{ todo.name }}</td>
           <td class="state">
             <!-- 状態変更ボタンのモック -->
-            <button>{{ item.state }}</button>
+            <button>{{ todo.done }}</button>
           </td>
           <td class="button">
             <!-- 削除ボタンのモック -->
@@ -24,16 +25,37 @@
         </tr>
       </tbody>
     </table>
+
+    <h2>新しい作業の追加</h2>
+    <form class="add-item" @submit.prevent="addTodo">
+      コメント <input type="text" ref="name">
+      <button type="submit">追加</button>
+    </form>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import TodoItem from '@/todoStorage';
+import TodoStorage, { TodoItem } from '@/todoStorage';
+
+const todoStorage = new TodoStorage()
 
 @Component
 export default class App extends Vue {
   private todos: TodoItem[] = []
+
+  private addTodo() {
+    const name = this.$refs.name as HTMLInputElement
+    if (!name.value.length) {
+      return
+    }
+    this.todos.push({
+      id: todoStorage.nextId,
+      name: name.value,
+      done: false
+    })
+    name.value = ''
+  }
 }
 </script>
 
