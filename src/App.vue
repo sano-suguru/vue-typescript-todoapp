@@ -24,6 +24,12 @@
         </tr>
       </tbody>
     </table>
+
+    <h2>新しい作業の追加</h2>
+    <form class="add-item">
+      コメント <input type="text" ref="name">
+      <button type="submit">追加</button>
+    </form>
   </div>
 </template>
 
