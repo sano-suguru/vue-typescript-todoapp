@@ -1,6 +1,6 @@
 <template>
-<div>
-  <table>
+  <div>
+    <table>
       <thead>
         <tr>
           <th class="id">ID</th>
@@ -13,7 +13,7 @@
         <!-- TODO: todoを１行ずつ繰り返し表示したい -->
       </tbody>
     </table>
-</div>
+  </div>
 </template>
 
 <script lang="ts">
