@@ -5,7 +5,7 @@ export interface TodoItem {
 }
 
 interface Storable {
-  getItem(key: string): string
+  getItem(key: string): string | null
   setItem(key: string, value: string): void
 }
 
