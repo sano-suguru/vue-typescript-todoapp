@@ -20,7 +20,7 @@
           </td>
           <td class="button">
             <!-- 削除ボタンのモック -->
-            <button @click="removeTodo">
+            <button @click="removeTodo(todo)">
               削除
             </button>
           </td>
