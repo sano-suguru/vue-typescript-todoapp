@@ -44,6 +44,10 @@ const todoStorage = new TodoStorage()
 export default class App extends Vue {
   private todos: TodoItem[] = []
 
+  private created() {
+    this.todos = todoStorage.fetchAll()
+  }
+
   private addTodo() {
     const name = this.$refs.name as HTMLInputElement
     if (!name.value.length) {
