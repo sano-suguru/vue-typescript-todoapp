@@ -19,7 +19,6 @@
             <button>{{ todo.done }}</button>
           </td>
           <td class="button">
-            <!-- 削除ボタンのモック -->
             <button @click.shift="removeTodo(todo)">
               削除
             </button>
