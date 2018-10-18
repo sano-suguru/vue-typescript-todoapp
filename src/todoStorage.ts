@@ -13,7 +13,7 @@ const STORAGE_KEY = 'vue-ts-todoapp'
 
 export default class TodoStorage {
   get nextId(): number {
-    return this.fetchAll().length
+    return this.fetchAll().length + 1
   }
 
   constructor(
