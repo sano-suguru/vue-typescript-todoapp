@@ -35,7 +35,7 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Vue, Watch } from 'vue-property-decorator';
 import TodoStorage, { TodoItem } from '@/todoStorage';
 
 const todoStorage = new TodoStorage()
@@ -55,6 +55,11 @@ export default class App extends Vue {
       done: false
     })
     name.value = ''
+  }
+
+  @Watch('todos', { deep: true })
+  private onTodoChanged(todos: TodoItem[]) {
+    todoStorage.save(todos)
   }
 }
 </script>
