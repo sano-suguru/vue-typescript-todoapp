@@ -15,8 +15,9 @@
           <th>{{ todo.id }}</th>
           <td>{{ todo.name }}</td>
           <td class="state">
-            <!-- 状態変更ボタンのモック -->
-            <button>{{ todo.done }}</button>
+            <button @click="toggleState(todo)">
+              {{ todo.done ? "完了" : "作業中" }}
+            </button>
           </td>
           <td class="button">
             <button @click.shift="removeTodo(todo)">
@@ -65,6 +66,10 @@ export default class App extends Vue {
   private removeTodo(todo: TodoItem) {
     const index = this.todos.indexOf(todo)
     this.todos.splice(index, 1)
+  }
+
+  private toggleState(todo: TodoItem) {
+    todo.done = !todo.done
   }
 
   @Watch('todos', { deep: true })
