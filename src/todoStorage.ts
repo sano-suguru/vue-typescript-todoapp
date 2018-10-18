@@ -20,11 +20,12 @@ export default class TodoStorage {
     private storage: Storable = localStorage
   ) { }
 
-  public fetchAll() {
+  public fetchAll(): TodoItem[] {
     const todos = JSON.parse(
       this.storage.getItem(STORAGE_KEY) || '[]'
     ) as TodoItem[]
-    return todos.map((todo, index) => todo.id = index);
+    todos.forEach((todo, index) => todo.id = index)
+    return todos
   }
 
   public save(todos: TodoItem[]) {
