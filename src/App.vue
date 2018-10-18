@@ -20,7 +20,9 @@
           </td>
           <td class="button">
             <!-- 削除ボタンのモック -->
-            <button>削除</button>
+            <button @click.shift="removeTodo(todo)">
+              削除
+            </button>
           </td>
         </tr>
       </tbody>
@@ -59,6 +61,11 @@ export default class App extends Vue {
       done: false
     })
     name.value = ''
+  }
+
+  private removeTodo(todo: TodoItem) {
+    const index = this.todos.indexOf(todo)
+    this.todos.splice(index, 1)
   }
 
   @Watch('todos', { deep: true })
