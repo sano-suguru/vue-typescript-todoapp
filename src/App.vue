@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Vue-TypeScript-TODOリスト</h1>
     <label v-for="[state, text] in Array.from(labels)" :key="state">
       <input type="radio" v-model="current" :value="state">
       {{ text }}
