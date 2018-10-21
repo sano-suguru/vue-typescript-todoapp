@@ -16,7 +16,6 @@
         </tr>
       </thead>
       <tbody>
-        <!-- TODO: todoを１行ずつ繰り返し表示したい -->
         <tr v-for="todo in filteredTodos" :key="todo.id">
           <th>{{ todo.id }}</th>
           <td>{{ todo.name }}</td>
