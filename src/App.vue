@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1>Vue-TypeScript-TODOリスト</h1>
     <label v-for="[state, text] in Array.from(labels)" :key="state">
       <input type="radio" v-model="current" :value="state">
       {{ text }}
@@ -15,7 +16,6 @@
         </tr>
       </thead>
       <tbody>
-        <!-- TODO: todoを１行ずつ繰り返し表示したい -->
         <tr v-for="todo in filteredTodos" :key="todo.id">
           <th>{{ todo.id }}</th>
           <td>{{ todo.name }}</td>
@@ -32,6 +32,10 @@
         </tr>
       </tbody>
     </table>
+
+    <p>
+      ※削除ボタンはコントロールキーを押しながらクリックして下さい
+    </p>
 
     <h2>新しい作業の追加</h2>
     <form class="add-item" @submit.prevent="addTodo">
