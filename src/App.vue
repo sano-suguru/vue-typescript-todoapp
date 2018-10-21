@@ -1,5 +1,9 @@
 <template>
   <div>
+    <label v-for="[state, text] in Array.from(labels)" :key="state">
+      <input type="radio" v-model="current" :value="state">
+      {{ text }}
+    </label>
     <table>
       <thead>
         <tr>
@@ -42,9 +46,19 @@ import TodoStorage, { TodoItem } from '@/todoStorage';
 
 const todoStorage = new TodoStorage()
 
+enum State { All, Working, Done }
+
 @Component
 export default class App extends Vue {
   private todos: TodoItem[] = []
+
+  private labels = new Map<State, string>([
+    [State.All, '全て'],
+    [State.Working, '作業中'],
+    [State.Done, '完了']
+  ])
+
+  private current: State = State.All
 
   private created() {
     this.todos = todoStorage.fetchAll()
