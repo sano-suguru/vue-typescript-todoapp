@@ -4,6 +4,7 @@
       <input type="radio" v-model="current" :value="state">
       {{ text }}
     </label>
+    {{ filteredTodos.length }} 件を表示中
     <table>
       <thead>
         <tr>
