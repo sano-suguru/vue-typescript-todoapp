@@ -15,12 +15,12 @@
       </thead>
       <tbody>
         <!-- TODO: todoを１行ずつ繰り返し表示したい -->
-        <tr v-for="todo in todos" :key="todo.id">
+        <tr v-for="todo in filteredTodos" :key="todo.id">
           <th>{{ todo.id }}</th>
           <td>{{ todo.name }}</td>
           <td class="state">
             <button @click="toggleState(todo)">
-              {{ todo.done ? "完了" : "作業中" }}
+              {{ labels.get(todo.state) }}
             </button>
           </td>
           <td class="button">
@@ -58,6 +58,11 @@ export default class App extends Vue {
   ])
 
   private current: State = State.All
+
+  private get filteredTodos() {
+    return this.todos.filter(t =>
+      this.current === State.All ? true : this.current === t.state)
+  }
 
   private created() {
     this.todos = todoStorage.fetchAll()
