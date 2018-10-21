@@ -33,6 +33,10 @@
       </tbody>
     </table>
 
+    <p>
+      ※削除ボタンはコントロールキーを押しながらクリックして下さい
+    </p>
+
     <h2>新しい作業の追加</h2>
     <form class="add-item" @submit.prevent="addTodo">
       コメント <input type="text" ref="name">
