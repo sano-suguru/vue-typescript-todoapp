@@ -1,4 +1,4 @@
-import { TodoItem } from '@/TodoItem.ts'
+import { TodoItem } from '@/todoItem'
 
 interface Storable {
   getItem(key: string): string | null
