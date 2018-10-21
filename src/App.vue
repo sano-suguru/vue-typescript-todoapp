@@ -1,5 +1,10 @@
 <template>
   <div>
+    <label v-for="[state, text] in Array.from(labels)" :key="state">
+      <input type="radio" v-model="current" :value="state">
+      {{ text }}
+    </label>
+    {{ filteredTodos.length }} 件を表示中
     <table>
       <thead>
         <tr>
@@ -11,12 +16,12 @@
       </thead>
       <tbody>
         <!-- TODO: todoを１行ずつ繰り返し表示したい -->
-        <tr v-for="todo in todos" :key="todo.id">
+        <tr v-for="todo in filteredTodos" :key="todo.id">
           <th>{{ todo.id }}</th>
           <td>{{ todo.name }}</td>
           <td class="state">
             <button @click="toggleState(todo)">
-              {{ todo.done ? "完了" : "作業中" }}
+              {{ labels.get(todo.state) }}
             </button>
           </td>
           <td class="button">
@@ -38,13 +43,27 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator';
-import TodoStorage, { TodoItem } from '@/todoStorage';
+import TodoStorage from '@/todoStorage';
+import { State, TodoItem } from '@/todoItem.ts'
 
 const todoStorage = new TodoStorage()
 
 @Component
 export default class App extends Vue {
   private todos: TodoItem[] = []
+
+  private labels = new Map<State, string>([
+    [State.All, '全て'],
+    [State.Working, '作業中'],
+    [State.Done, '完了']
+  ])
+
+  private current: State = State.All
+
+  private get filteredTodos() {
+    return this.todos.filter(t =>
+      this.current === State.All ? true : this.current === t.state)
+  }
 
   private created() {
     this.todos = todoStorage.fetchAll()
@@ -58,7 +77,7 @@ export default class App extends Vue {
     this.todos.push({
       id: todoStorage.nextId,
       name: name.value,
-      done: false
+      state: State.Working
     })
     name.value = ''
   }
@@ -69,7 +88,7 @@ export default class App extends Vue {
   }
 
   private toggleState(todo: TodoItem) {
-    todo.done = !todo.done
+    todo.state = todo.state === State.Working ? State.Done : State.Working
   }
 
   @Watch('todos', { deep: true })

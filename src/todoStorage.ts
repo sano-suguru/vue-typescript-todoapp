@@ -1,8 +1,4 @@
-export interface TodoItem {
-  id: number
-  name: string
-  done: boolean
-}
+import { TodoItem } from '@/TodoItem.ts'
 
 interface Storable {
   getItem(key: string): string | null
