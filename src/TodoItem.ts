@@ -3,5 +3,5 @@ export enum State { All, Working, Done }
 export interface TodoItem {
   id: number
   name: string
-  done: State.Working | State.Done
+  state: State.Working | State.Done
 }
