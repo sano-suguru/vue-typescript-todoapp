@@ -42,11 +42,10 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator';
-import TodoStorage, { TodoItem } from '@/todoStorage';
+import TodoStorage from '@/todoStorage';
+import { State, TodoItem } from '@/todoItem.ts'
 
 const todoStorage = new TodoStorage()
-
-enum State { All, Working, Done }
 
 @Component
 export default class App extends Vue {
@@ -72,7 +71,7 @@ export default class App extends Vue {
     this.todos.push({
       id: todoStorage.nextId,
       name: name.value,
-      done: false
+      state: State.Working
     })
     name.value = ''
   }
@@ -83,7 +82,7 @@ export default class App extends Vue {
   }
 
   private toggleState(todo: TodoItem) {
-    todo.done = !todo.done
+    todo.state = todo.state === State.Working ? State.Done : State.Working
   }
 
   @Watch('todos', { deep: true })
